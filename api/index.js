@@ -39,8 +39,7 @@ app.post("/customers", async (req, res) => {
 app.get("/customers", async (req, res) => {
   try {
     const customerList = await pool.query("SELECT * FROM customers");
-    res.json(customerList.rows);
-    console.log(customerList);
+    res.status(200).json(customerList.rows);
   } catch (e) {
     console.error(e.message);
   }
@@ -55,7 +54,7 @@ app.get("/customers/search/:name", async (req, res) => {
       [name]
     );
 
-    res.json(customer.rows);
+    res.status(200).json(customer.rows);
   } catch (e) {
     res.status(500);
 		res.send({data:'Something went wrong'});
@@ -72,7 +71,7 @@ app.get("/customers/:id", async (req, res) => {
       [id]
     );
 
-    res.json(customer.rows);
+    res.status(200).json(customer.rows);
   } catch (e) {
     res.status(500);
 		res.send({data:'Something went wrong'});
@@ -99,7 +98,7 @@ app.put("/customers/:id", async (req, res) => {
         [name, age, gender, email, phone, city, state, zipcode,id]
       );
 
-    res.json(" Successfully updated!");
+    res.status(200).json(" Successfully updated!");
   } catch (e) {
     res.status(500);
 		res.send({data:'Something went wrong'});
@@ -112,7 +111,7 @@ app.delete("/customers/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const deleteCustomer = await pool.query("DELETE FROM customers WHERE customer_id =$1", [id]);
-        res.json(deleteCustomer);
+        res.status(200).json("Successfully Deleted");
     }catch(e){
         res.status(500);
 		    res.send({data:'Something went wrong'});
