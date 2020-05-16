@@ -1,17 +1,21 @@
 const express = require("express");
+const bodyParser = require('body-parser');
 const app = express();
 const cors = require("cors");
 const {pool} = require("./config");
 
 //middleware
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors());
-app.use(express.json()); //req.body
+// app.use(express.json()); //req.body
 
 //ROUTES//
 
 //Add a new customer
 
-app.post("/customers", async (req, res) => {
+app.post("/customers", async (req, res) => { 
+  
   try {
     const { name } = req.body;
     const { age } = req.body;
@@ -21,12 +25,13 @@ app.post("/customers", async (req, res) => {
     const { city } = req.body;
     const { state } = req.body;
     const { zipcode } = req.body;
+
     const newCustomer = await pool.query(
-      "INSERT INTO customers (name,age,gender,email,phone,city, state,zipcode) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *",
+      'INSERT INTO customers (name,age,gender,email,phone,city,state,zipcode) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) ',
       [name, age, gender, email, phone, city, state, zipcode]
     );
-
-    res.json(newCustomer.rows[0]);
+      
+    res.status(200).json(newCustomer.rows[0]);
   } catch (e) {
     res.status(500);
 		res.send({data:'Something went wrong'});
@@ -118,6 +123,6 @@ app.delete("/customers/:id", async (req, res) => {
     }
 });
 
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log("server has started on port 5000");
 });
