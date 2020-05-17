@@ -3,97 +3,97 @@ A simple web-application  using reactjs, nodejs, express and postgresql.
 
 Instruction to run the app.
 
-1. Clone the repo.
+Clone the repo.
 
-   ###### To run the api server
+##### To run the api server
 
-2. Navigate to the api folder 
+Navigate to the api folder 
 
-   ```
-   cd api/
-   ```
+```
+cd api/
+```
 
-   
 
-3. Run the commands
 
-   ```
-   npm install
-   npm start
-   ```
+Run the commands
 
-   Now the api is running  at http://127.0.0.1:5000/
+```
+npm install
+npm start
+```
 
-   ###### Set up a postgresql database locally
+Now the api is running  at http://127.0.0.1:5000/
 
-   1. install postgresql 
+##### Set up a postgresql database locally
 
-      ```
-      sudo apt-get update
-      
-      sudo apt-get install postgresql postgresql-contrib
-      ```
+install postgresql 
 
-      
+```
+sudo apt-get update
 
-   2. login to postgres account
+sudo apt-get install postgresql postgresql-contrib
+```
 
-      ```
-      sudo -u postgres psql
-      ```
 
-      
 
-   3. Create the database and tables
+login to postgres account
 
-      1. ```
-         1. CREATE DATABASE customerservicedb;
-         
-            
-         
-            CREATE TABLE customers(
-         
-             	customer_id SERIAL PRIMARY KEY,
-         
-                 name VARCHAR(20),
-         
-                 age VARCHAR(5),
-         
-                 gender VARCHAR(10),
-         
-                 email VARCHAR(40),
-         
-                 phone VARCHAR(20),
-         
-                 city VARCHAR(20),
-         
-                 state VARCHAR(20),
-         
-                 zipcode VARCHAR(10)
-         
-             );
-         ```
+```
+sudo -u postgres psql
+```
 
-      
 
-###### To run the front-end 
 
-1. Navigate to the client folder 
+Create the database and tables
 
-   ```
-   cd client-app/
-   ```
+```
+ CREATE DATABASE customerservicedb;
 
    
 
-2. Run the commands
+   CREATE TABLE customers(
 
-   ```
-   npm install
-   npm start
-   ```
+    	customer_id SERIAL PRIMARY KEY,
 
-   
+        name VARCHAR(20),
+
+        age VARCHAR(5),
+
+        gender VARCHAR(10),
+
+        email VARCHAR(40),
+
+        phone VARCHAR(20),
+
+        city VARCHAR(20),
+
+        state VARCHAR(20),
+
+        zipcode VARCHAR(10)
+
+    );
+```
+
+
+
+##### To run the front-end 
+
+Navigate to the client folder 
+
+```
+cd client-app/
+```
+
+
+
+Run the commands
+
+```
+npm install
+npm start
+```
+
+
 
 Now, front-end is running at  http://127.0.0.1:3000/  
 
