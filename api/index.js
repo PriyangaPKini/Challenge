@@ -4,11 +4,13 @@ const app = express();
 const cors = require("cors");
 const {pool} = require("./config");
 
+
 //middleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors());
 // app.use(express.json()); //req.body
+
 
 //ROUTES//
 
@@ -34,19 +36,21 @@ app.post("/customers", async (req, res) => {
     res.status(200).json(newCustomer.rows[0]);
   } catch (e) {
     res.status(500);
-		res.send({data:'Something went wrong'});
-
+    res.send({data:'Something went wrong'});
   }
 });
 
 //get all customer
 
 app.get("/customers", async (req, res) => {
+
   try {
     const customerList = await pool.query("SELECT * FROM customers");
-    res.status(200).json(customerList.rows);
+    res.status(200).json(customerList.rows);  
+  
   } catch (e) {
-    console.error(e.message);
+    res.status(500);
+		res.send({data:'Something went wrong'});
   }
 });
 
@@ -125,4 +129,5 @@ app.delete("/customers/:id", async (req, res) => {
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("server has started on port 5000");
+  
 });
